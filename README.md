@@ -101,7 +101,7 @@ touch .streamlit/secrets.toml
 Edit the `secrets.toml` file and add your OpenAI API key:
 ```toml
 OPENAI_API_KEY = "your-api-key-here"
-MODEL_NAME = "gpt-4.1-mini-2025-04-14"  # Optional - change model
+MODEL_NAME = "gpt-5.1-2025-11-13 "  # Optional - change model
 ```
 
 ### Step 5: Run the application

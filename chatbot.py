@@ -666,11 +666,11 @@ def extract_topics_llm(message):
         raise ValueError("OpenAI API key not configured in Streamlit secrets")
     
     # Initialize the LLM
-    model_name = st.secrets.get("MODEL_NAME", "gpt-4.1-mini-2025-04-14")
+    model_name = st.secrets.get("MODEL_NAME", "gpt-5.1-2025-11-13 ")
     chat = ChatOpenAI(
         openai_api_key=api_key,
         model=model_name,
-        max_tokens=150  # Small context for topic extraction
+        max_completion_tokens=150  # Small context for topic extraction
     )
     
     # Get current language and level if available
@@ -894,8 +894,8 @@ def call_openai_api(session_state):
     try:
         # Get API key and model from Streamlit secrets
         api_key = st.secrets.get("OPENAI_API_KEY", "")
-        model_name = st.secrets.get("MODEL_NAME", "gpt-4.1-mini-2025-04-14")
-        max_tokens = st.secrets.get("MAX_TOKENS", 8000)
+        model_name = st.secrets.get("MODEL_NAME", "gpt-5.1-2025-11-13 ")
+        max_completion_tokens = st.secrets.get("MAX_COMPLETION_TOKENS", 8000)
         
         if not api_key:
             return "Error: OpenAI API key not configured. Please set up your API key in the .streamlit/secrets.toml file."
@@ -904,7 +904,7 @@ def call_openai_api(session_state):
         chat = ChatOpenAI(
             openai_api_key=api_key,
             model=model_name,
-            max_tokens=max_tokens,
+            max_completion_tokens=max_completion_tokens,
             streaming=True
         )
         
