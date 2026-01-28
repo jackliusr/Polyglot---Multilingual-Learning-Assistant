@@ -388,11 +388,11 @@ def detect_language_llm(text: str) -> str:
         raise ValueError("OpenAI API key not configured in Streamlit secrets")
     
     # Initialize the LLM
-    model_name = st.secrets.get("MODEL_NAME", "gpt-5.1-2025-11-13 ")
+    model_name = st.secrets.get("MODEL_NAME", "gpt-4.1-mini-2025-04-14")
     chat = ChatOpenAI(
         openai_api_key=api_key,
         model=model_name,
-        max_completion_tokens=50  # Small context since we just need the language code
+        max_tokens=50  # Small context since we just need the language code
     )
     
     # Get supported languages
@@ -542,11 +542,11 @@ def extract_exercise_parameters_llm(text):
         raise ValueError("OpenAI API key not configured in Streamlit secrets")
     
     # Initialize the LLM
-    model_name = st.secrets.get("MODEL_NAME", "gpt-5.1-2025-11-13 ")
+    model_name = st.secrets.get("MODEL_NAME", "gpt-4.1-mini-2025-04-14")
     chat = ChatOpenAI(
         openai_api_key=api_key,
         model=model_name,
-        max_completion_tokens=200  # Small context for parameter extraction
+        max_tokens=200  # Small context for parameter extraction
     )
     
     # Get current language if available
