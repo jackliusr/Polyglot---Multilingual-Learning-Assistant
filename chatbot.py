@@ -3,7 +3,7 @@ import time
 from datetime import datetime
 import re
 import base64
-from langchain_openai import ChatOpenAI
+from langchain_deepseek import ChatDeepSeek
 from utils import get_level_appropriate_content, get_level_color, format_level_badge
 
 # Generic system prompt with language-specific adaptation
@@ -655,20 +655,20 @@ def extract_topics_llm(message):
     Extract learning topics from message using LLM with caching
     """
     # Import required libraries
-    from langchain_openai import ChatOpenAI
+    from langchain_deepseek import ChatDeepSeek
     import streamlit as st
     import json
     import re
     
     # Get API key from Streamlit secrets
-    api_key = st.secrets.get("OPENAI_API_KEY", "")
+    api_key = st.secrets.get("DEEPSEEK_API_KEY", "")
     if not api_key:
         raise ValueError("OpenAI API key not configured in Streamlit secrets")
     
     # Initialize the LLM
     model_name = st.secrets.get("MODEL_NAME", "gpt-4.1-mini-2025-04-14")
-    chat = ChatOpenAI(
-        openai_api_key=api_key,
+    chat = ChatDeepSeek(
+        api_key=api_key,
         model=model_name,
         max_tokens=150  # Small context for topic extraction
     )
@@ -889,11 +889,11 @@ def get_language_flag(lang_code):
         }
         return language_flags.get(lang_code, "🌍")
 
-# Function to call OpenAI API using LangChain's ChatOpenAI
+# Function to call OpenAI API using LangChain's ChatDeepSeek
 def call_openai_api(session_state):
     try:
         # Get API key and model from Streamlit secrets
-        api_key = st.secrets.get("OPENAI_API_KEY", "")
+        api_key = st.secrets.get("DEEPSEEK_API_KEY", "")
         model_name = st.secrets.get("MODEL_NAME", "gpt-4.1-mini-2025-04-14")
         max_tokens = st.secrets.get("MAX_TOKENS", 8000)
         
@@ -901,8 +901,8 @@ def call_openai_api(session_state):
             return "Error: OpenAI API key not configured. Please set up your API key in the .streamlit/secrets.toml file."
         
         # Initialize the LangChain OpenAI client
-        chat = ChatOpenAI(
-            openai_api_key=api_key,
+        chat = ChatDeepSeek(
+            api_key=api_key,
             model=model_name,
             max_tokens=max_tokens,
             streaming=True
