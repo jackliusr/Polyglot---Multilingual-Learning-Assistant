@@ -79,19 +79,10 @@ cd polyglot-language-tutor
 
 ### Step 2: Create and activate a virtual environment
 ```bash
-python -m venv venv
-# On Windows
-venv\Scripts\activate
-# On MacOS/Linux
-source venv/bin/activate
+uv sync
 ```
 
-### Step 3: Install dependencies
-```bash
-pip install -r requirements.txt
-```
-
-### Step 4: Set up Streamlit secrets
+### Step 3: Set up Streamlit secrets
 Create a `.streamlit/secrets.toml` file in your project directory:
 ```bash
 mkdir -p .streamlit
@@ -101,11 +92,13 @@ touch .streamlit/secrets.toml
 Edit the `secrets.toml` file and add your OpenAI API key:
 ```toml
 OPENAI_API_KEY = "your-api-key-here"
+DEEPSEEK_API_KEY= ""
 MODEL_NAME = "gpt-4.1-mini-2025-04-14"  # Optional - change model
 ```
 
-### Step 5: Run the application
+### Step 4: Run the application
 ```bash
+source .venv/bin/activate
 streamlit run app.py
 ```
 
